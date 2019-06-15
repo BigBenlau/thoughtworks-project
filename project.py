@@ -1,11 +1,6 @@
 import numpy as np
 import copy
 import time
-maxx = 10
-maxy = 10
-c = ""
-# map1 = np.ones((maxx + 1, maxy + 1))*0
-# map1[1][1] = map1[1][2] = map1[2][1] = map1[2][2] = map1[3][3] = map1[3][4] = map1[4][3] = map1[4][4] = 1
 
 def input_grid():
     print('------Grid setup------')
@@ -15,49 +10,44 @@ def input_grid():
     if len(maxx) == 0:
         maxx = 10
     else:
-        maxx=int(maxx)
+        maxx = int(maxx)
     if len(maxy) == 0:
         maxy = 10
     else:
         maxy = int(maxy)
-    print('Grid setup:%d * %d ' %(maxx,maxy))
-    return maxx,maxy  
-
-def input_map(x,y):
-    grid = input_grid()
-    maxx = grid[0]
-    maxy = grid[1]
+    print('Grid setup:%d * %d' %(maxx,maxy))
     map1 = np.ones((maxx + 1, maxy + 1))*0
+    return 
+
+def input_map(x, y):
+    global map1
     map1[x-1][y-1] = 1
-    return map1
+    return
 
-input_map(3,5)
+def check_round_num(x, y):
+    count = 0
+    for i in range(8): 
+        nx = x + dx[i]
+        ny = y + dy[i]
+        if(nx >= 0 and nx < maxx and ny >= 0 and nx < maxy):
+            if map_before[nx][ny] == 1: count += 1
+    return count
+
+def life_rule():
+    for i in range(maxx):
+        for j in range(maxy):
+            if (check_round_num(i, j) <= 1 or check_round_num(i, j) >= 4): map1[i][j] = 0
+            elif check_round_num(i, j) == 3: map1[i][j] = 1
 
 
-
-
-
-def main(mymap):
+def main():
     global map1, map_before
-    map1=mymap
+    input_grid()
+    input_map(2, 3)
     dx = [-1, -1, -1, 0, 0, 1, 1, 1]
     dy = [-1, 0, 1, -1, 1, -1, 0, 1]
-    def check_round_num(x, y):
-        count = 0
-        for i in range(8): 
-            nx = x + dx[i]
-            ny = y + dy[i]
-            if(nx >= 0 and nx < maxx and ny >= 0 and nx < maxy):
-                if map_before[nx][ny] == 1: count += 1
-        return count
 
-    def life_rule():
-        for i in range(maxx):
-            for j in range(maxy):
-                if (check_round_num(i, j) <= 1 or check_round_num(i, j) >= 4): map1[i][j] = 0
-                elif check_round_num(i, j) == 3: map1[i][j] = 1
-    
-    next_time = 1
+    # next_time = 1
     # while 1:
         # time_start = time.time()
 
@@ -69,5 +59,3 @@ def main(mymap):
         # while(time_end - time_start < next_time):
         #     time_end = time.time()
     return map1
-
-# main(map1)
