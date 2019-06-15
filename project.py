@@ -3,6 +3,15 @@ import copy
 import time
 map1 = []
 
+
+# basic map
+# map_list = [[3,2],[3,3],[3,4]] #Blinker
+# map_list = [[3,3],[3,4],[3,5],[4,2],[4,3],[4,4]] #Toad
+# map_list = [[2,3],[3,4],[4,2],[4,3],[4,4]] #Glider
+map_list = [[3,5],[4,4],[4,5],[4,6],[5,4],[6,5],[5,6]] #Small Exploder
+
+
+
 def input_grid():
     global map1, maxx, maxy
     print('------Grid setup------')
@@ -21,10 +30,18 @@ def input_grid():
     map1 = np.ones((maxx + 1, maxy + 1))*0
     return 
 
-def input_map(x, y):
+def input_map(x, y):  
     global map1
     map1[x-1][y-1] = 1
     return
+
+def init_map(map_list):
+    for xy in range(len(map_list)):
+        x = map_list[xy][0]
+        y = map_list[xy][1]
+        input_map(x, y)
+
+
 
 def check_round_num(x, y):
     count = 0
@@ -47,13 +64,13 @@ def life_rule():
 def main():
     global map1, map_before
     input_grid()
-    input_map(2, 3)
+    init_map(map_list)
+    print('-----before-----\n', map1)
     
-    next_time = 1
+    next_time = 2
     while 1:
         time_start = time.time()
         map_before = copy.deepcopy(map1)
-        print('-----before-----\n', map_before)
         life_rule()
         print('-----after-----\n', map1)
         time_end = time.time()
