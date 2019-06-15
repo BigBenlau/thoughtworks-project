@@ -1,12 +1,14 @@
 import numpy as np
 import copy
 import time
+map1 = []
 
 def input_grid():
+    global map1, maxx, maxy
     print('------Grid setup------')
     print('default:10*10')
-    maxx=input('input maxx:')
-    maxy=input('input maxy:')
+    maxx = input('input maxx:')
+    maxy = input('input maxy:')
     if len(maxx) == 0:
         maxx = 10
     else:
@@ -26,6 +28,8 @@ def input_map(x, y):
 
 def check_round_num(x, y):
     count = 0
+    dx = [-1, -1, -1, 0, 0, 1, 1, 1]
+    dy = [-1, 0, 1, -1, 1, -1, 0, 1]
     for i in range(8): 
         nx = x + dx[i]
         ny = y + dy[i]
@@ -34,28 +38,26 @@ def check_round_num(x, y):
     return count
 
 def life_rule():
+    global maxx, maxy
     for i in range(maxx):
         for j in range(maxy):
             if (check_round_num(i, j) <= 1 or check_round_num(i, j) >= 4): map1[i][j] = 0
             elif check_round_num(i, j) == 3: map1[i][j] = 1
 
-
 def main():
     global map1, map_before
     input_grid()
     input_map(2, 3)
-    dx = [-1, -1, -1, 0, 0, 1, 1, 1]
-    dy = [-1, 0, 1, -1, 1, -1, 0, 1]
+    
+    next_time = 1
+    while 1:
+        time_start = time.time()
+        map_before = copy.deepcopy(map1)
+        print('-----before-----\n', map_before)
+        life_rule()
+        print('-----after-----\n', map1)
+        time_end = time.time()
+        while(time_end - time_start < next_time):
+            time_end = time.time()
 
-    # next_time = 1
-    # while 1:
-        # time_start = time.time()
-
-    map_before = copy.deepcopy(map1)
-    print('-----before-----\n', map_before)
-    life_rule()
-    print('-----after-----\n', map1)
-        # time_end = time.time()
-        # while(time_end - time_start < next_time):
-        #     time_end = time.time()
-    return map1
+main()
