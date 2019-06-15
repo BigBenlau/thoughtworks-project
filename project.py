@@ -1,5 +1,6 @@
 import numpy as np
 import copy
+import time
 maxx = 10
 maxy = 10
 c = ""
@@ -21,9 +22,13 @@ def life_rule():
         for j in range(maxy):
             if (check_round_num(i, j) <= 1 or check_round_num(i, j) >= 4): map1[i][j] = 0
             elif check_round_num(i, j) == 3: map1[i][j] = 1
-map1[3][2] = map1[3][3] = map1[3][4] = 1
-while c != "end":
-    c = input("input:")
+map1[1][1] = map1[1][2] = map1[2][1] = map1[2][2] = map1[3][3] = map1[3][4] = map1[4][3] = map1[4][4] = 1
+next_time = 1
+while 1:
+    time_start = time.time()
     map_before = copy.deepcopy(map1)
     life_rule()
     print(map1)
+    time_end = time.time()
+    while(time_end - time_start < next_time):
+        time_end = time.time()
