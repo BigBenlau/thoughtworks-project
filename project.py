@@ -7,4 +7,6 @@ def check_round_num(x, y):
         nx = x + dx[i], ny = y + dy[i]
         if(nx >= 0 && nx < maxx && ny >= 0 && nx < maxy && map1[maxr][maxl]) count = count + 1
     return count
+
+def life_rule():
     
