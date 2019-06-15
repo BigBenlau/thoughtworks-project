@@ -4,11 +4,12 @@ import time
 maxx = 10
 maxy = 10
 c = ""
-map1 = np.ones((maxx + 1, maxy + 1))*0
-map1[1][1] = map1[1][2] = map1[2][1] = map1[2][2] = map1[3][3] = map1[3][4] = map1[4][3] = map1[4][4] = 1
+# map1 = np.ones((maxx + 1, maxy + 1))*0
+# map1[1][1] = map1[1][2] = map1[2][1] = map1[2][2] = map1[3][3] = map1[3][4] = map1[4][3] = map1[4][4] = 1
 
-def main(x):
+def main(mymap):
     global map1, map_before
+    map1=mymap
     dx = [-1, -1, -1, 0, 0, 1, 1, 1]
     dy = [-1, 0, 1, -1, 1, -1, 0, 1]
     def check_round_num(x, y):
@@ -33,7 +34,7 @@ def main(x):
     map_before = copy.deepcopy(map1)
     print('-----before-----\n', map_before)
     life_rule()
-    print('-----after-----\n', map1)
+    print('-----after-----\n', map1[])
         # time_end = time.time()
         # while(time_end - time_start < next_time):
         #     time_end = time.time()
