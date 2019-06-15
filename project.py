@@ -1,4 +1,5 @@
 import numpy as np
+import copy
 maxx = 10
 maxy = 10
 c = ""
@@ -14,15 +15,15 @@ def check_round_num(x, y):
             if map_before[nx][ny] == 1: count += 1
     return count
 
-def life_rule(map_before):
-    global map1
+def life_rule():
+    global map1, map_before
     for i in range(maxx):
         for j in range(maxy):
             if (check_round_num(i, j) <= 1 or check_round_num(i, j) >= 4): map1[i][j] = 0
             elif check_round_num(i, j) == 3: map1[i][j] = 1
+map1[3][2] = map1[3][3] = map1[3][4] = 1
 while c != "end":
     c = input("input:")
-    map1[3][2] = map1[3][3] = map1[3][4] = 1
-    map_before = map1[:]
-    life_rule(map_before)
+    map_before = copy.deepcopy(map1)
+    life_rule()
     print(map1)
