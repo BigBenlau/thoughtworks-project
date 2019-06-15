@@ -6,6 +6,24 @@ maxy = 10
 c = ""
 # map1 = np.ones((maxx + 1, maxy + 1))*0
 # map1[1][1] = map1[1][2] = map1[2][1] = map1[2][2] = map1[3][3] = map1[3][4] = map1[4][3] = map1[4][4] = 1
+def input_grid():
+    print('------Grid setup------')
+    print('default:10*10')
+    maxx=input('input maxx:')
+    maxy=input('input maxy:')
+    if len(maxx)==0:
+        maxx=10
+    else:
+        maxx=int(maxx)
+    if len(maxy)==0:
+        maxy=10
+    else:
+        maxy=int(maxy)
+    print('Grid setup:%d * %d ' %(maxx,maxy))
+    return maxx,maxy  
+
+
+
 
 def main(mymap):
     global map1, map_before
