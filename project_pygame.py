@@ -77,8 +77,8 @@ def play():
         check_output = 0
         start = 0
         while 1:
-            button("Start",600,30,100,50,green,bright_green,True)
-            button("Stop",800,30,100,50,red,white,True)
+            button("Start",600,30,100,50,green,bright_green,)
+            button("Stop",800,30,100,50,red,bright_red,)
             # output
             #tracking quitting
             for event in pygame.event.get():
@@ -113,8 +113,8 @@ def button(msg,x,y,w,h,ic,ac,action=None):
     click = pygame.mouse.get_pressed()
     if click[0] == 1 and x+w > mouse[0] > x and y+h > mouse[1] > y:
         pygame.draw.rect(scrn, ac,(x,y,w,h))
-        action()
-   
+        if(action != None):
+            action()
     else:
         pygame.draw.rect(scrn, ic,(x,y,w,h))
 
