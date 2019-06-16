@@ -78,9 +78,6 @@ def life_rule():
             if (check_round_num(i, j) <= 1 or check_round_num(i, j) >= 4): map1[i][j] = 0
             elif check_round_num(i, j) == 3: map1[i][j] = 1
 
-def generate():
-    map1[48][46] = map1[48][47] = map1[48][48] = 1
-
 #main game function        
 def play():
         global scrn         
@@ -156,7 +153,7 @@ def text_objects(text, font):
 def main():
     global map1, map_before, next_time
     input_grid()
-    next_time = 0.5
+    next_time = int(input("State Duration(s): "))
     play()
 
 main()
