@@ -83,6 +83,8 @@ def play():
         global scrn         
         #initialization
         pygame.init()
+        map_list=select_map()
+        init_map(map_list)
         pygame.display.set_caption('Game of Life')
         scrn = pygame.display.set_mode((1000, 500))
         funsrf = pygame.Surface((500, 500))
@@ -90,10 +92,6 @@ def play():
         mainsrf = pygame.Surface((500, 500))
         mainsrf.fill(white)
         game_intro()
-        # initialize map
-        map_list=select_map()
-        init_map(map_list)
-        # generate()
         #game cycle
         time_start = time.time()
         check_output = 0
