@@ -36,6 +36,28 @@ def input_map(x, y):
     map1[x-1][y-1] = 1
     return
 
+def select_map():
+    Blinker = [[23,22],[23,23],[23,24]] #Blinker
+    Toad = [[23,23],[23,24],[23,25],[24,22],[24,23],[24,24]] #Toad
+    Glider = [[22,23],[23,24],[24,22],[24,23],[24,24]] #Glider
+    Small_Exploder = [[23,25],[24,24],[24,25],[24,26],[25,24],[26,25],[25,26]] #Small Exploder
+    maps = {'Blinker':Blinker,'Toad':Toad,'Glider':Glider,'Small_Exploder':Small_Exploder}
+    
+    print('------select_map------')
+    print(maps.keys())
+    print('default:Small_Exploder')
+    choice=input('input map name:')
+    if len(choice) == 0:
+        choice = 'Small_Exploder'
+    maplist=maps[choice]
+    return maplist
+
+def init_map(map_list):
+    for xy in range(len(map_list)):
+        x = map_list[xy][0]
+        y = map_list[xy][1]
+        input_map(x, y)
+
 def check_round_num(x, y):
     global maxx, maxy, map_before
     count = 0
@@ -71,7 +93,10 @@ def play():
         mainsrf = pygame.Surface((500, 500))
         mainsrf.fill(white)
         game_intro()
-        generate()
+        # initialize map
+        map_list=select_map()
+        init_map(map_list)
+        # generate()
         #game cycle
         time_start = time.time()
         check_output = 0
